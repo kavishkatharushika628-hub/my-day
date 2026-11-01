@@ -7,15 +7,12 @@ workflows:
     environment:
       java: 17
 
-    scripts:
+        scripts:
       - name: Build My Day APK
         script: |
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-            ./gradlew assembleDebug
-          else
-            gradle assembleDebug
-          fi
+          curl -L https://services.gradle.org/distributions/gradle-9.3.1-bin.zip -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp
+          /tmp/gradle-9.3.1/bin/gradle assembleDebug
 
     artifacts:
       - app/build/outputs/**/*.apk
